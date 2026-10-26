@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>寻点描画 · 睛彩乐园</title><link rel="stylesheet" href="../../shared/base.css"><style>
+.tabs{display:none}
+/* 侧栏顶部返回首页（标题区在侧栏布局里是隐藏的） */
+.sidebar-top{display:flex;flex-shrink:0}
+.sidebar-top .home-link{flex:1;text-align:center;padding:10px}
+/* 角色多，侧栏用网格排布 */
+.sidebar .animals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:10px}
+.sidebar .animals button{padding:7px 2px;font-size:11px;border-radius:8px}
+/* 绿点直接画在 SVG 线条上（跟着主轮廓走） */
+.path-dot{fill:#24e43e;stroke:#fff;stroke-width:2;cursor:pointer;transform-box:fill-box;transform-origin:center;animation:dotpulse 1.5s ease-in-out infinite;filter:drop-shadow(0 0 5px rgba(36,228,62,.9))}
+.path-dot:hover{filter:drop-shadow(0 0 10px rgba(36,228,62,1)) brightness(1.08)}
+.path-dot:focus-visible{stroke:#237968;stroke-width:4;outline:none}
+@keyframes dotpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.32)}}
+/* 描完后真实配色图整幅浮现 */
+.stage .finale{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;animation:finale-in .9s ease both}
+.stage .finale svg{width:82%;height:82%;max-width:760px;max-height:82%;overflow:hidden}
+@keyframes finale-in{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+</style></head><body><main><div class="heading"><div><h1>寻点描画</h1><p>跟着绿点沿线条走一圈，看看藏着什么图案。</p></div><div class="session">◷ 本次探索 <b id="timer">00:00</b> <a class="home-link" href="../../index.html">⌂ 首页</a></div></div><div class="layout"><aside class="sidebar"><div class="sidebar-top"><a class="home-link" href="../../index.html">← 返回首页</a></div><section class="card"><div class="label">图案预览 <span class="muted">目标图</span></div><div id="preview" class="preview"></div><div class="label"><span id="animalTitle">小汽车</span><span class="muted">选择图案</span></div><div class="animals"><button data-animal="car" class="selected">汽车</button><button data-animal="rocket">火箭</button><button data-animal="boat">帆船</button><button data-animal="house">房子</button><button data-animal="balloon">气球</button><button data-animal="fox">狐狸</button><button data-animal="cat">小猫</button><button data-animal="rabbit">兔子</button></div></section><section class="card"><div class="label">寻找小绿点</div><p class="note">绿点按顺序落在图案的主线条上，点掉一个就长出下一段。<br>一路描下去，整幅画就浮出来了。</p><div class="hint" style="margin-top:18px">共 16 个点 · 无需拖动<br>完成后可换图案再试一次</div></section><div class="settings"><label>游戏音效 <button type="button" data-sound-toggle aria-pressed="true">🔊 音效开</button></label><button id="fullscreen" style="margin-left:auto">⛶ 全屏</button></div><div class="bottom">闪烁可能引起光敏不适，有光敏性癫痫史者请勿使用闪烁模式；不适时立即暂停。此项目为互动演示，不提供治疗方案。</div></aside><section><div class="workspace"><div class="workhead"><span class="label" id="workTitle">沿绿点描出线条，看看藏着什么</span><span class="status" id="status">黑白块交替闪烁中</span></div><div class="stage" id="stage"></div><div class="footbar"><div><span class="muted" id="progressText"></span><div class="progress"><i id="progressBar"></i></div></div><div class="controls"><button id="reset">↻ 重新开始</button><button id="pause" class="primary">Ⅱ 暂停</button></div></div></div></section></div></main><script src="../../shared/audio.js?v=3"></script><script src="../../shared/animals.js"></script><script src="../../shared/shell.js"></script><script src="dots.js"></script></body></html>
